@@ -91,8 +91,9 @@ def technology():
         "HTTP",
         "REST API"
     ]
-    
+# ========================================================
 # Dynamic urls
+# ========================================================
 @app.get('/student/{student_id}')
 def get_student_by_id(student_id : int):
     return {
