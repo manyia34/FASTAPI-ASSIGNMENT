@@ -57,7 +57,6 @@ def get_student_info_by_id(student_id : int):
 def get_students(course : str | None = None):
     if course is not None:
         filtered_students = []
-        
         for student in students:
             if student["course"].lower() == course.lower():
                 filtered_students.append(student)  
