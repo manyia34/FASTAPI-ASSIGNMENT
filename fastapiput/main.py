@@ -42,10 +42,11 @@ class BookUpdate(BaseModel):
 def update_book(book_id : int , book : BookUpdate):
     for existing_book in books:
         if existing_book["id"] == book_id:
-            existing_book["tittle"] = book.tittle
-            existing_book["author"] = book.author
-            existing_book["genre"] = book.genre
-            existing_book["language"] = book.language
+            # existing_book["tittle"] = book.tittle
+            # existing_book["author"] = book.author
+            # existing_book["genre"] = book.genre
+            # existing_book["language"] = book.language
+            existing_book.update(book.model_dump())
             return {
                 "message" : "Book update Successfully !",
                 "book" : existing_book 
