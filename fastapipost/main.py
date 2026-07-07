@@ -41,9 +41,9 @@ def get_books():
 #   Backend Stores Book
 #           ▼
 #   Response Status Code (201 Created)
-# ============================================
-# Pydantic validation of data 
-# ============================================
+# ============================================================
+# Pydantic validation of data / Structure of the response body 
+# ============================================================
 class BookCreate(BaseModel):
     tittle : str
     genre : str
@@ -53,11 +53,13 @@ class BookCreate(BaseModel):
 # =====================================================
 # Creatig a new book sending data from client to server
 # =====================================================
-@app.post('/books',status_code=201)                                 # status code is declared in path parameter
-def create_book(book : BookCreate):                                 # This calls the pydantic class
+@app.post('/books',status_code=201)         # status code is declared in path parameter
+def create_book(book : BookCreate):   # This calls the pydantic class
+    # Logic to create the new_id
     new_id = max((book["id"] for book in books),default=0) + 1
-    new_book = {                                                    # dictonary for entering the new c;ass
-        "id" : new_id,
+    #  # dictonary for entering the new class
+    new_book = {            
+        "id" : new_id,                          
         "tittle" : book.tittle,
         "genre" : book.genre,
         "author" : book.author,
@@ -68,3 +70,4 @@ def create_book(book : BookCreate):                                 # This calls
         "message" : "Book added successfully!",
         "book" : new_book
     }
+
