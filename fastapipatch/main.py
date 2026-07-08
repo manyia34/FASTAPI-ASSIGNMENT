@@ -3,6 +3,9 @@ from pydantic import BaseModel
 from typing import Optional  # This is used to create option to change the specific field
 app = FastAPI()
 
+# ==============================================
+# Books List
+# ==============================================
 books = [
     {
         "id": 1,
