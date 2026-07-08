@@ -1,6 +1,7 @@
-from fastapi import FastAPI , HTTPException
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import Optional  # This is used to create option to change the specific field
+# This is used to create option to change the specific field
+from typing import Optional
 app = FastAPI()
 
 # ==============================================
@@ -26,24 +27,29 @@ books = [
 # ==================================
 # API Codes
 # ==================================
+
+
 @app.get('/')
 def read_books():
     return books
 
+
 @app.get('/book')
 def get_books():
-    return books 
+    return books
 
 # ====================================
-# Delete API 
+# Delete API
 # ====================================
+
+
 @app.delete('/books/{book_id}')
-def delete_book(book_id : int):
+def delete_book(book_id: int):
     for existing_book in books:
         if existing_book["id"] == book_id:
             books.remove(existing_book)
             return {
-                "message" : "Book deleted Successfully",
-                "book" : existing_book
+                "message": "Book deleted Successfully",
+                "book": existing_book
             }
-    raise HTTPException(status_code=404 , detail="Book Not found") 
+    raise HTTPException(status_code=404, detail="Book Not found")
