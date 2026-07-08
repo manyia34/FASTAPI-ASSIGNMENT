@@ -1,7 +1,6 @@
 from fastapi import FastAPI , HTTPException
 from pydantic import BaseModel
-from typing import Optional
-
+from typing import Optional  # This is used to create option to change the specific field
 app = FastAPI()
 
 books = [
@@ -21,6 +20,9 @@ books = [
     }
 ]
 
+# ==================================
+# API Codes
+# ==================================
 @app.get('/')
 def read_books():
     return books
@@ -29,18 +31,24 @@ def read_books():
 def get_books():
     return books 
 
+# ================================================================
+# Pydantic structure with to change the specific area or field
+# ================================================================
 class BookUpdate(BaseModel):
     title : Optional[str] = None
     author : Optional[str] = None
     genre : Optional[str] = None
     language : Optional[str] = None
     
+# =============================================
+# Patch API code
+# =============================================
 @app.patch('/books/{book_id}')
 def Update_books(book_id : int , book : BookUpdate):
     for existing_book in books:
         if existing_book["id"] == book_id:
             if book.title is not None:
-                existing_book["title"] = book.title
+                existing_book["title"] = book.title           # Creating Multiple option
             if book.language is not None:
                 existing_book["language"] = book.language
             if book.genre is not None:
