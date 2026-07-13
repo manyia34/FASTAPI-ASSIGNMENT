@@ -24,7 +24,6 @@ class BookCreate(BaseModel):
     language: str
     genre: str
 
-
 # =====================================
 # Pydantic Model for update the book
 # ====================================
@@ -34,7 +33,6 @@ class BookUpdate(BaseModel):
     language: str
     genre: str
 
-
 # ====================================================================
 # Pydantic Model for PATCH - all fields optional for partial update
 # ====================================================================
@@ -43,7 +41,6 @@ class BookPatch(BaseModel):
     author: Optional[str] = None
     language: Optional[str] = None
     genre: Optional[str] = None
-
 
 # ===================================================================
 # Response Model is used when we to show some specific information
@@ -55,7 +52,6 @@ class BookResponse(BaseModel):
     genre: str
     language: str
 
-
 # ======================================
 # Message Response Model
 # ======================================
@@ -63,14 +59,12 @@ class BookActionResponse(BaseModel):
     message: str
     book: BookResponse
 
-
 # ===================================================================
 # list[BookResponse] is used because we return all the books record
 # ==================================================================
 @app.get('/books', response_model=list[BookResponse])
 def get_books():
     return books
-
 
 # ============================================================
 # Response model is always written in the decorator
@@ -84,7 +78,6 @@ def get_books_by_id(book_id: int):
                         detail="Book Not Found!")
 
 # HTTP_404_NOT_FOUND is used to show the error message when the book is not found in the name constraints
-
 
 # =========================================================
 #  POST creation of the new books using the response mddel
@@ -113,7 +106,6 @@ def add_new_book(book: BookCreate):
         "book": new_book
     }
 
-
 # ==============================================
 # PUT : is used to update the whole Data
 # ==============================================
@@ -132,7 +124,6 @@ def Update_book(book_id: int, book: BookUpdate):
             }
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                         detail="Book Not found")
-
 
 # ==============================================================
 # PATCH : is used to update only the given (partial) fields
@@ -157,7 +148,6 @@ def patch_book(book_id: int, book: BookPatch):
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                         detail="Book Not found")
 
-
 # ================================
 # Delete : To delete the data
 # ================================
@@ -172,3 +162,4 @@ def delete_book(book_id: int):
             }
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                         detail="Book Not found")
+    
